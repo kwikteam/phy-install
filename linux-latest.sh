@@ -106,12 +106,7 @@ export PATH=\"$MINICONDA_PATH/bin:\$PATH\"" >>$BASH_RC
 
 export PATH=$MINICONDA_PATH/bin:\$PATH
 
-    CONDA_CMD=$MINICONDA_PATH/bin/conda
-    SOURCE_CMD=$MINICONDA_PATH/bin/source
-    PIP_CMD=$MINICONDA_PATH/bin/pip
-
 fi # finished installing miniconda
-
 
 if [[ $BATCH == 0 ]]; then
     printf 'Would you like to create a new Python virtual environment for phy?
