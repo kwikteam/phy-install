@@ -8,7 +8,7 @@ unset LD_LIBRARY_PATH
 echo "$0" | grep '\.sh$' >/dev/null
 if (( $? )); then
     echo 'Please run using "bash" or "sh", but not "." or "source"' >&2
-    return 1
+    exit 1
 fi
 
 BATCH=0
@@ -104,7 +104,7 @@ A backup will be made to: ${BASH_RC}-miniconda.bak
 # added by Miniconda 3.7.0 installer
 export PATH=\"$MINICONDA_PATH/bin:\$PATH\"" >>$BASH_RC
 
-export PATH=$MINICONDA_PATH/bin:\$PATH
+export PATH=$MINICONDA_PATH/bin:$PATH
 
 fi # finished installing miniconda
 
@@ -121,7 +121,7 @@ Virtual environment name (no spaces) (leave blank for none) [$VENV] >>> "
 fi # batch mode
 
 if [[ ($VENV != '') ]]; then # create a venv
-    conda create -q -n $VENV python=3.4
+    conda create -q -n $VENV python=3.4 --yes
     source activate $VENV
 fi # venv creation
 
@@ -132,19 +132,17 @@ conda install pip numpy matplotlib scipy h5py pyqt ipython-notebook requests --y
 pip install vispy phy
 
 echo "
-Thank you for installing phy!
-"
+Thank you for installing phy!"
 
 if [[ $VENV != '' ]]; then
-    echo "
-Before using phy, you must type \"source activate $VENV\"
+    echo "Before using phy, you must type \"source activate $VENV\"
 to activate the virtual environment in every new terminal you create.
 "
 fi
 
-echo "
-You can manually cluster a dataset with: phy cluster-manual myfile.kwik
+echo "You can manually cluster a dataset with: phy cluster-manual myfile.kwik
 Launch an IPython Notebook to analyse your data with \"ipython notebook\"
-For help and more documentation, visit http://phy.cortexlab.net."
+For help and more documentation, visit http://phy.cortexlab.net.
+"
 
 exit 0
