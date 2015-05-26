@@ -81,12 +81,23 @@ Skipping install of miniconda...
 fi
 
 if [[ $INSTALL_MINICONDA == 1 ]]; then
-    if [[ `uname -m` == 'x86_64' ]]; then
-        wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-        bash Miniconda3-latest-Linux-x86_64.sh -b -p $MINICONDA_PATH
+    
+    if [[ `uname -s` == 'Linux' ]]; then
+        if [[ `uname -m` == 'x86_64' ]]; then
+            wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+            bash Miniconda3-latest-Linux-x86_64.sh -b -p $MINICONDA_PATH
+        else
+            wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86.sh
+            bash Miniconda3-latest-Linux-x86.sh -b -p $MINICONDA_PATH
+        fi
+    elif [[ `uname -s` == 'Darwin' ]]; then
+            wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+            bash Miniconda3-latest-MacOSX-x86_64.sh -b -p $MINICONDA_PATH
     else
-        wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86.sh
-        bash Miniconda3-latest-Linux-x86.sh -b -p $MINICONDA_PATH
+        echo "
+Your operating system does not seem to be supported. Please file an issue
+on https://github.com/phy/issues
+"
     fi
 
     if [ -f $BASH_RC ]; then
