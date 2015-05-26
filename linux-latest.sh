@@ -4,18 +4,16 @@
 # phy-latest install script
 #
 
-unset LD_LIBRARY_PATH
-echo "$0" | grep '\.sh$' >/dev/null
-if (( $? )); then
-    echo 'Please run using "bash" or "sh", but not "." or "source"' >&2
-    exit 1
-fi
-
-BATCH=0
 INSTALL_MINICONDA=1
 MINICONDA_PATH=$HOME/miniconda
 BASH_RC=$HOME/.bashrc
 VENV=''
+
+if [[ -t 0 ]]; then # we're in a terminal!
+    BATCH=0
+else
+    BATCH=1 # running automated
+fi
 
 USAGE_MSG='usage:\n
 
@@ -73,7 +71,9 @@ DEFAULT="yes"
     if [[ ($ans != "yes") && ($ans != "Yes") && ($ans != "YES") &&
                 ($ans != "y") && ($ans != "Y")]]
     then
-        echo "\nSkipping install of miniconda...\n"
+        echo "
+Skipping install of miniconda...
+"
         INSTALL_MINICONDA=0
     else
         INSTALL_MINICONDA=1
@@ -140,9 +140,13 @@ to activate the virtual environment in every new terminal you create.
 "
 fi
 
-echo "You can manually cluster a dataset with: phy cluster-manual myfile.kwik
+echo "You can manually cluster a dataset with \"phy cluster-manual myfile.kwik\"
 Launch an IPython Notebook to analyse your data with \"ipython notebook\"
 For help and more documentation, visit http://phy.cortexlab.net.
+"
+
+echo "Please run \"source ~/.bashrc\" or open a new terminal before running
+phy for the first time.
 "
 
 exit 0
