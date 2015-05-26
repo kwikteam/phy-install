@@ -91,13 +91,18 @@ if [[ $INSTALL_MINICONDA == 1 ]]; then
             bash Miniconda3-latest-Linux-x86.sh -b -p $MINICONDA_PATH
         fi
     elif [[ `uname -s` == 'Darwin' ]]; then
+        if [[ `uname -m` == 'x86_64' ]]; then
             wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
             bash Miniconda3-latest-MacOSX-x86_64.sh -b -p $MINICONDA_PATH
+        else
+            echo "32-bit Mac OS is no longer supported. Please install miniconda and phy manually."
+        fi
     else
         echo "
 Your operating system does not seem to be supported. Please file an issue
 on https://github.com/phy/issues
 "
+exit 1
     fi
 
     if [ -f $BASH_RC ]; then
