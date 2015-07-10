@@ -159,7 +159,7 @@ pip install vispy
 if [[ $DEV == 0 ]]; then
     pip install phy
 else
-    pip install --pre phy
+    pip install git+https://github.com/kwikteam/phy
 fi
 
 echo "
