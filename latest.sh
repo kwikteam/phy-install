@@ -88,16 +88,16 @@ if [[ $INSTALL_MINICONDA == 1 ]]; then
     
     if [[ `uname -s` == 'Linux' ]]; then
         if [[ `uname -m` == 'x86_64' ]]; then
-            curl -O  http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+            wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
             bash Miniconda3-latest-Linux-x86_64.sh -b -p $MINICONDA_PATH
         else
-            curl -O  http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86.sh
+            wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86.sh
             bash Miniconda3-latest-Linux-x86.sh -b -p $MINICONDA_PATH
         fi
         BASH_RC=$HOME/.bashrc
     elif [[ `uname -s` == 'Darwin' ]]; then
         if [[ `uname -m` == 'x86_64' ]]; then
-            curl -O http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+            curl -LO http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
             bash Miniconda3-latest-MacOSX-x86_64.sh -b -p $MINICONDA_PATH
         else
             echo "32-bit Mac OS is no longer supported. Please install miniconda and phy manually."
@@ -151,7 +151,7 @@ fi # venv creation
 conda install pip numpy matplotlib scipy h5py pyqt ipython-notebook requests --yes
 
 # Install klustakwik
-conda install -c http://conda.anaconda.org/kwikteam/ klustakwik2
+conda install -c http://conda.anaconda.org/kwikteam/ klustakwik2 --yes
 
 # Install VisPy and phy
 pip install vispy
