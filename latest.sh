@@ -151,7 +151,7 @@ fi # venv creation
 conda install pip numpy matplotlib scipy h5py pyqt ipython-notebook requests --yes
 
 # Install klustakwik
-conda install -c http://conda.anaconda.org/kwikteam/ klustakwik2
+conda install -c http://conda.anaconda.org/kwikteam/ klustakwik2 --yes
 
 # Install VisPy and phy
 pip install vispy
