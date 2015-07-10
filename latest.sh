@@ -7,6 +7,7 @@
 INSTALL_MINICONDA=1
 MINICONDA_PATH=$HOME/miniconda
 VENV=''
+DEV=0
 
 if [[ -t 0 ]]; then # we're in a terminal!
     BATCH=0
@@ -18,17 +19,21 @@ USAGE_MSG='usage:\n
 
     -b           run install in batch mode (without manual intervention),\n
     -h           print this help message and exit\n
+    -d           development version (--pre)
     -s           skip installation of miniconda (just install phy)\n
     -p PREFIX    miniconda install path, defaults to $MINICONDA_PATH
 '
 
 printf 'Welcome to the phy installer (by the Kwik Team).\n\n'
 
-while getopts "bhsp:" x; do
+while getopts "bhdsp:" x; do
     case "$x" in
         h)
             echo -e $USAGE_MSG
             exit 2
+            ;;
+        d)
+            DEV=1
             ;;
         b)
             BATCH=1
@@ -149,7 +154,13 @@ conda install pip numpy matplotlib scipy h5py pyqt ipython-notebook requests --y
 conda install -c http://conda.anaconda.org/kwikteam/ klustakwik2
 
 # Install VisPy and phy
-pip install vispy phy
+pip install vispy
+
+if [[ $DEV == 0 ]]; then
+    pip install phy
+else
+    pip install git+https://github.com/kwikteam/phy
+fi
 
 echo "
 Thank you for installing phy!"
