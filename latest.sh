@@ -176,7 +176,7 @@ Launch an IPython Notebook to analyse your data with \"ipython notebook\"
 For help and more documentation, visit http://phy.cortexlab.net.
 "
 
-echo "Please run \"source ~/.bashrc\" or open a new terminal before running
+echo "Please close this terminal and open a new one before running
 phy for the first time.
 "
 
