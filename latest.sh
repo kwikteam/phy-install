@@ -148,7 +148,7 @@ if [[ ($VENV != '') ]]; then # create a venv
 fi # venv creation
 
 # Install all dependencies
-conda install pip numpy matplotlib scipy h5py pyqt ipython-notebook requests --yes
+conda install pip numpy matplotlib scipy h5py pyqt ipython-notebook requests six --yes
 
 # Install klustakwik
 conda install -c http://conda.anaconda.org/kwikteam/ klustakwik2 --yes
