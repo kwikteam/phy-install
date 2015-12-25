@@ -3,8 +3,9 @@ pushd ~
 .\miniconda3.exe /RegisterPython=1 /S /D="$Home\miniconda3" | Out-Null
 $env:Path += ";$Home\miniconda3\;$Home\miniconda3\Scripts"
 conda config --set ssl_verify false
-conda install conda python=3.4 pip numpy matplotlib scipy h5py pyqt ipython-notebook requests vispy six -y
+conda env create python=3.5 -y
+source activate phy
 conda install -c kwikteam klustakwik2 -y
 conda config --set ssl_verify true
-pip install vispy phy
+pip install -e .
 popd
